@@ -1,15 +1,12 @@
 package com.registeration.pojo;
-
 import javax.persistence.*;
-import java.math.BigInteger;
-import java.util.Date;
 
 /**
  * Created by nara1016 on 10-04-2017.
  */
 @Entity
-@Table(name = "registered_users")
-public class User {
+@Table(name = "users")
+public class RegisterUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,8 +14,7 @@ public class User {
     private String password;
     private String name;
     private String email;
-    private Date dob;
-    private BigInteger phoneNumber;
+    private String address;
 
     public String getName() {
         return name;
@@ -26,6 +22,15 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() { return email;    }
@@ -44,14 +49,8 @@ public class User {
         this.password = password;
     }
 
-    public Date getDob() { return dob; }
+    public RegisterUser() {
 
-    public void setDob(Date dob) {  this.dob = dob;  }
-
-    public BigInteger getPhoneNumber() {    return phoneNumber;    }
-
-    public void setPhoneNumber(BigInteger phoneNumber) {    this.phoneNumber = phoneNumber;    }
-
-    public User() {    }
+    }
 
 }

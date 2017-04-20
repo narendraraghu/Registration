@@ -1,8 +1,9 @@
 package com.registeration.services;
-import com.registeration.pojo.User;
+
+import com.registeration.pojo.RegisterUser;
 
 public interface RegistrationUserService {
-    User save(User apiRequest);
-    Iterable<User> listAllUsers();
-    User getUserById(Integer id);
+    RegisterUser save(RegisterUser apiRequest);
+    Iterable<RegisterUser> listAllUsers();
+    RegisterUser getUserById(Integer id);
 }

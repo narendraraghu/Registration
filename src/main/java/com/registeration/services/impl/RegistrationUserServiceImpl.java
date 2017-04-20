@@ -1,6 +1,6 @@
 package com.registeration.services.impl;
 
-import com.registeration.pojo.User;
+import com.registeration.pojo.RegisterUser;
 import com.registeration.repository.UserRepository;
 import com.registeration.services.RegistrationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +19,18 @@ public class RegistrationUserServiceImpl implements RegistrationUserService {
     }
 
     @Override
-    public User save(User User) {
-        userRepository.save(User);
-        return User;
+    public RegisterUser save(RegisterUser registerUser) {
+        userRepository.save(registerUser);
+        return registerUser;
     }
 
     @Override
-    public Iterable<User> listAllUsers() {
+    public Iterable<RegisterUser> listAllUsers() {
         return null;
     }
 
     @Override
-    public User getUserById(Integer id) {
+    public RegisterUser getUserById(Integer id) {
         return null;
     }
 }

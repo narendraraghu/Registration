@@ -1,9 +1,10 @@
 package com.registeration.repository;
+import com.registeration.pojo.RegisterUser;
 import org.springframework.data.repository.CrudRepository;
-import  com.registeration.pojo.User;
+
 /**
  * Created by nara1016 on 12-04-2017.
  */
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UserRepository extends CrudRepository<RegisterUser, Integer> {
 
 }

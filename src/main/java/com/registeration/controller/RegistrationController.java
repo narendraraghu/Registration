@@ -1,9 +1,9 @@
 package com.registeration.controller;
 
 import com.registeration.services.RegistrationUserService;
+import com.registeration.pojo.RegisterUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.registeration.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,47 +20,67 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RegistrationController {
 
 
-    private RegistrationUserService registrationUserService ;
+    private RegistrationUserService registrationService ;
 
     @Autowired
-    public void setRegistrationUserService(RegistrationUserService registrationUserService) {
-        this.registrationUserService = registrationUserService;
+    public void setRegistrationService(RegistrationUserService registrationService) {
+        this.registrationService = registrationService;
     }
+
+
 
     private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
+         System.out.print("Index called  ");
+        return "index";
+    }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerUser(Model model) {
-        model.addAttribute("user", new User());
-        System.out.print("Call to User 1  ");
+        model.addAttribute("registerUser", new RegisterUser());
+        System.out.print("Call to registerUser 1  ");
         return "registrationForm";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String UserSubmit(@ModelAttribute User user, Model model) {
-        model.addAttribute("user", user);
-        System.out.print("User Call 2  ");
+    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+    public String registerUserSubmit(@ModelAttribute RegisterUser registerUser, Model model) {
+        model.addAttribute("registerUser", registerUser);
+        System.out.print("registerUser Call 2  ");
 
         try {
-            
-            System.out.print("getUserId  " + user.getUserId() +
-                    " getName  " + user.getName() +
-                    " getEmail  " + user.getEmail() +
-                    " getPassword  " + user.getPassword());
 
-            user.setEmail(user.getEmail());
-            user.setName(user.getName());
-            user.setPassword(user.getPassword());
-            final User save = registrationUserService.save(user);
+            registrationService.save(registerUser);
+            System.out.print("getUserId  " + registerUser.getUserId() +
+                    " getName  " + registerUser.getName() +
+                    " getEmail  " + registerUser.getEmail() +
+                    " getPassword  " + registerUser.getPassword());
+
+            registerUser.setUserId(registerUser.getUserId());
+            registerUser.setEmail(registerUser.getEmail());
+            registerUser.setName(registerUser.getName());
+            registerUser.setPassword(registerUser.getPassword());
+            registerUser.setAddress(registerUser.getAddress());
+
+            final RegisterUser save = registrationService.save(registerUser);
             System.out.print(" save  " + save);
-            System.out.print(" User SAVED :) ");
+            System.out.print(" registerUser SAVED :) ");
 
         } catch (Exception e) {
             logger.error(" Error occurred while trying to process api request", e);
 
         }
 
-        return "welcomeUser";
+        return "registrationSuccessful";
     }
+
+
+    @RequestMapping(value = "/registrationSuccessful", method = RequestMethod.GET)
+    public String getAllUser(Model model) {
+        model.addAttribute("registerUser", new RegisterUser());
+        System.out.print("Call to registerUser 1  ");
+        return "getUser";
+    }
+
 }
